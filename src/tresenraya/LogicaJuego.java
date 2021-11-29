@@ -1,5 +1,6 @@
 package tresenraya;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class LogicaJuego {
@@ -106,12 +107,21 @@ public class LogicaJuego {
         // Inserta código aquí...
         
         // Deshabilita el botón
+        bt.setEnabled(false);
         
         // Insertar la ficha en el botón
+        ponerFicha(matriz,x,y,bt);
                
         // Comprobar si se ha ganado la partida
+        if(comprobarJuego(matriz) == 1) {
+            habilitado = false;
+            ganador(lX,lO);
+            habilitarTablero(jp);
+        }else cambioTurno();
          
          // Deshabilitar tablero
+
+
          return 0;
     }
     
@@ -124,7 +134,16 @@ public class LogicaJuego {
     public void ganador(javax.swing.JLabel lX, javax.swing.JLabel lO){
         // Inserta código aquí...
         
-        // Incrementa jugador ganador e inserta resultado en jLabel    
+        // Incrementa jugador ganador e inserta resultado en jLabel
+        if(turno==0){
+            setpX(getpX()+1);
+            lX.setText(String.valueOf(getpX()));
+        }else if(turno==1){
+            setpO(getpO()+1);
+            lO.setText(String.valueOf(getpO()));
+        }
+
+        cambioTurno();
  
     }
     
@@ -132,11 +151,13 @@ public class LogicaJuego {
      * Habilitará o deshabilitará el tablero dependiendo del estado de la variable habilitado
      * @param jp  (Panel dónde se sitúa el tablero de juego)
      */
-    public void habilitarTablero( javax.swing.JPanel jp){
+    public void habilitarTablero( JPanel jp){
         // Inserta código aquí...
         // Bloquea todos los elementos del JPanel
-        
-        
+        for (Component botones : jp.getComponents()) {
+            botones.setEnabled(habilitado);
+        }
+
     }
     
     /**
@@ -163,15 +184,15 @@ public class LogicaJuego {
     private void pintarFicha(javax.swing.JButton bt){
         // Inserta código aquí...
         // Si el turno es de 0 pintará una X en rojo
+        if (turno == 0) {
+            bt.setText("X");
+            bt.setForeground(Color.RED);
+        }
+         // Si el turno es de 1, pintará una O en azul
         if(turno== 1){
-            bt.setText("○");
+            bt.setText("O");
             bt.setForeground(Color.BLUE);
 
-        }
-         // Si el turno es de 1, pintará una O en azul 
-        if (turno == 0) {
-            bt.setText("✕");
-            bt.setForeground(Color.RED);
         }
     }
     

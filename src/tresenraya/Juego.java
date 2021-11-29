@@ -1,5 +1,7 @@
 package tresenraya;
 
+import java.awt.*;
+
 public class Juego extends javax.swing.JFrame {
     
     int matriz[][] = new int[3][3];
@@ -20,6 +22,9 @@ public class Juego extends javax.swing.JFrame {
      */
     public void iniciarJuego(){
          // Inserta código aquí...
+        j.iniciarPartida(matriz,jPanel4);
+        clearButtons();
+
     }
 
     @SuppressWarnings("unchecked")
